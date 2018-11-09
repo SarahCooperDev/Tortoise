@@ -1,9 +1,9 @@
 import React, {Component, } from 'react';
 import PropTypes from 'prop-types';
 import {connect, } from 'react-redux';
-import 'whatwg-fetch';
+import { Link } from 'react-router-dom';
 
-export class App extends Component {
+export default class Main extends Component {
     constructor(props){
         super(props);
         this.state = {};
@@ -15,21 +15,8 @@ export class App extends Component {
         return (
             <div>
                 <h2>In App</h2>
+                <Link to='/auth'>Auth</Link>
             </div>
         )
     }
 }
-
-App.propTypes = {
-    children: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    intl: PropTypes.object.isRequired,
-  };
-
-function mapStateToProps(store){
-    return {
-        intl: store.intl,
-    };
-}
-
-export default connect(mapStateToProps)(App);

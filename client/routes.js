@@ -1,29 +1,13 @@
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-import App from './modules/App/App';
-
-if(typeof require.ensure !== 'function'){
-    require.ensure = function requireModule(deps, callback){
-        callback(require);
-    };
-}
+import { Route, Switch, IndexRoute} from 'react-router';
+import Main from './modules/App/App';
+import Auth from './modules/Auth/Auth';
 
 export default (
-    <Route path="/" component={App}>
-        <IndexRoute
-            getComponent={(nextState, cb) => {
-                require.ensure([], require => {
-                    cb(null, require('./modules/App/App'))
-                });
-            }}
-        />
-        <Route
-            path="/auth"
-            getComponent={(nextState, cb) => {
-                require.ensure([], require => {
-                cb(null, require('./modules/Authentication/Authentication').default);
-                });
-            }}
-        />
-    </Route>
+    <div>
+        <Switch>
+            <Route exact path='/' component={Main}/>
+            <Route path='/auth' component={Auth}/>
+        </Switch>
+    </div>
 );

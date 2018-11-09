@@ -1,13 +1,18 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
+import { BrowserRouter, Route} from 'react-router-dom';
+import Main from './modules/App/App';
 
-class App extends Component {
-    render(){
-        return (
-            <div>
-                <h1>Tortoise!</h1>
-            </div>
-        )
-    }
+import routes from './routes';
+
+export default function App(props) {
+    return (
+        <BrowserRouter>
+            {routes}
+        </BrowserRouter>
+    )
 }
 
-export default App;
+App.propTypes = {
+    store: PropTypes.object.isRequired,
+  };
