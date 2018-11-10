@@ -12,7 +12,3 @@ export default function App(props) {
         </BrowserRouter>
     )
 }
-
-App.propTypes = {
-    store: PropTypes.object.isRequired,
-  };

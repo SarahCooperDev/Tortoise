@@ -34,7 +34,12 @@ class Auth extends Component {
 
   signUp(){
     console.log("Signing up");
-    sendSignUp(this.state.email, this.state.password);
+    var signUpPromise = sendSignUp(this.state.email, this.state.password);
+
+    signUpPromise.then(result => {
+      console.log("In promise resolution");
+      console.log(result);
+    });
   }
 
   render() {
