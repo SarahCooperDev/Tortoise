@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-// Configuration
+// Express Configuration
 var app = express();
 
 app.use(bodyParser());
@@ -18,6 +18,9 @@ app.use(function(req, res, next){
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
+
+// Database Configuration
+const dbConfig = require('./db.config');
 
 // Routing
 var userRoutes = require('./routes/user.routes');

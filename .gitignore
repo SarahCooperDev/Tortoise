@@ -5,3 +5,6 @@
 
 # dependencies
 /node_modules
+
+# privacy configurations
+/server/db.config.js
