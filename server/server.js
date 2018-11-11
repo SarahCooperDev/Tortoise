@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const mongo = require('mongoose');
 
 // Express Configuration
 var app = express();
@@ -21,6 +22,14 @@ app.use(function(req, res, next){
 
 // Database Configuration
 const dbConfig = require('./db.config');
+
+var db = mongo.connect(dbConfig.atlasURL, {useNewUrlParser: true}, function(err, res){
+  if(err){
+    console.log(err);
+  } else {
+    console.log("Connected to " + dbConfig.atlasURL);
+  }
+});
 
 // Routing
 var userRoutes = require('./routes/user.routes');
