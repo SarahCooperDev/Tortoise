@@ -7,6 +7,7 @@ export function sendSignUp(email, password){
     return fetch(host + 'api/user/signup', {
         method: 'POST',
         body: JSON.stringify({email: email, password: password}),
+        credentials: 'include',
         headers: {'Content-type': 'application/json'}
     }).then(response => {
         return response.status;
