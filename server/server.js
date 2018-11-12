@@ -57,8 +57,10 @@ passport.deserializeUser((userId, done) => {
   });
 });
 
-passport.use(new LocalStrategy((email, password, done) => {
-  User.findOne({_id: userId}).exec((err, user) => {
+passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password' },(username, password, done) => {
+  console.log("In local strategy");
+  User.findOne({email: username}).exec((err, user) => {
+    console.log("User is " + user);
     if(err){
       return done(500);
     } else if(!user){

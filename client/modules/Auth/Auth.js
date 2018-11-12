@@ -1,5 +1,5 @@
 import React, {Component, } from 'react';
-import {sendSignUp} from './AuthActions';
+import { sendSignUp, sendSignIn } from './AuthActions';
 
 class Auth extends Component {
   constructor(props){
@@ -12,6 +12,7 @@ class Auth extends Component {
 
     this.switchAuth = this.switchAuth.bind(this);
     this.signUp = this.signUp.bind(this);
+    this.signIn = this.signIn.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
   }
@@ -38,7 +39,24 @@ class Auth extends Component {
 
     signUpPromise.then(result => {
       console.log("In promise resolution");
-      console.log(result);
+      console.log(result.status);
+      if(result.status === 200){
+        this.props.history.push('/dashboard');
+      }
+    });
+  }
+
+  signIn(){
+    console.log("Signing in");
+    var signInPromise = sendSignIn(this.state.email, this.state.password);
+
+    signInPromise.then(result => {
+      console.log("In promise resolution");
+      console.log(result.status);
+      if(result.status === 200){
+        console.log(this.props.history);
+        this.props.history.push('/dashboard');
+      }
     });
   }
 
@@ -51,6 +69,7 @@ class Auth extends Component {
             <li><label>Email</label><input type="text" id="email" name="email" value={this.state.email} onChange={this.onEmailChange}/></li>
             <li><label>Password</label><input type="password" id="password" name="password" value={this.state.password} onChange={this.onPasswordChange}/></li>
           </ul>
+          <button onClick={this.signIn}>Sign In</button>
           <button onClick={this.switchAuth}>Switch</button>
         </div>
       )
@@ -62,7 +81,7 @@ class Auth extends Component {
             <li><label>Email</label><input type="text" id="email" name="email" value={this.state.email} onChange={this.onEmailChange}/></li>
             <li><label>Password</label><input type="password" id="password" name="password" value={this.state.password} onChange={this.onPasswordChange}/></li>
           </ul>
-          <button onClick={this.signUp}>Submit</button>
+          <button onClick={this.signUp}>Sign Up</button>
           <button onClick={this.switchAuth}>Switch</button>
         </div>
       )

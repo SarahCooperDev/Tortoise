@@ -1,6 +1,35 @@
 const User = require('../models/User');
 const passport = require('passport');
 
+exports.signIn = function(req, res){
+  console.log("In sign in");
+
+  passport.authenticate('local', (status, user) => {
+    console.log("Status is " + status);
+    console.log("User is " + user);
+    if(status === 500){
+      return res.status(500);
+    } else if(status === 401){
+      return res.status(401).send({errorMsg: "User not registered"});
+    } else if(status === 403){
+      return res.status(403).send({errorMsg: "Password incorrect"});
+    } else if(!user){
+      return res.status(500);
+    } else {
+      req.login(user, (err => {
+        console.log("error is " + err);
+        if(err){
+          return res.status(502).send({errorMsg: "Error creating session"});
+        } else {
+          req.session.save(function(){
+            return res.send(200);
+          });
+        }
+      }))
+    }
+  })(req, res);
+}
+
 exports.signUp = function(req, res){
   console.log("In sign up");
   console.log("Email is " + req.body.email);

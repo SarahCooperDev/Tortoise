@@ -10,7 +10,26 @@ export function sendSignUp(email, password){
         credentials: 'include',
         headers: {'Content-type': 'application/json'}
     }).then(response => {
-        return response.status;
+        return response;
+    }).catch(error => {
+        console.log('error');
+        console.log(error);
+        return null;
+    });
+}
+
+export function sendSignIn(email, password){
+    var host = 'http://localhost:8081/';
+    console.log("In send sign in");
+    console.log(email + password);
+
+    return fetch(host + 'api/user/signin', {
+        method: 'POST',
+        body: JSON.stringify({email: email, password: password}),
+        credentials: 'include',
+        headers: {'Content-type': 'application/json'}
+    }).then(response => {
+        return response;
     }).catch(error => {
         console.log('error');
         console.log(error);
