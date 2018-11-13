@@ -5,21 +5,29 @@ class Auth extends Component {
   constructor(props){
     super(props);
     this.state = {
-      isRegistered: false,
+      isRegistered: true,
       email: '',
-      password: ''
+      username: '',
+      password: '',
     }
 
     this.switchAuth = this.switchAuth.bind(this);
     this.signUp = this.signUp.bind(this);
     this.signIn = this.signIn.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
+    this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
   }
 
   onEmailChange(event){
     this.setState({
       email: event.target.value
+    });
+  }
+
+  onUsernameChange(event){
+    this.setState({
+      username: event.target.value
     });
   }
 
@@ -35,11 +43,9 @@ class Auth extends Component {
 
   signUp(){
     console.log("Signing up");
-    var signUpPromise = sendSignUp(this.state.email, this.state.password);
+    var signUpPromise = sendSignUp(this.state.email, this.state.username, this.state.password);
 
     signUpPromise.then(result => {
-      console.log("In promise resolution");
-      console.log(result.status);
       if(result.status === 200){
         this.props.history.push('/dashboard');
       }
@@ -51,10 +57,7 @@ class Auth extends Component {
     var signInPromise = sendSignIn(this.state.email, this.state.password);
 
     signInPromise.then(result => {
-      console.log("In promise resolution");
-      console.log(result.status);
       if(result.status === 200){
-        console.log(this.props.history);
         this.props.history.push('/dashboard');
       }
     });
@@ -79,6 +82,7 @@ class Auth extends Component {
           <h1>Sign up</h1>
           <ul>
             <li><label>Email</label><input type="text" id="email" name="email" value={this.state.email} onChange={this.onEmailChange}/></li>
+            <li><label>Username</label><input type="text" id="username" name="username" value={this.state.username} onChange={this.onUsernameChange}/></li>
             <li><label>Password</label><input type="password" id="password" name="password" value={this.state.password} onChange={this.onPasswordChange}/></li>
           </ul>
           <button onClick={this.signUp}>Sign Up</button>

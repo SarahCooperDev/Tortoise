@@ -1,12 +1,12 @@
+import config from '../../config';
 
-export function sendSignUp(email, password){
-    var host = 'http://localhost:8081/';
+export function sendSignUp(email, username, password){
     console.log("In send sign up");
-    console.log(email + password);
+    console.log(email + password + username);
 
-    return fetch(host + 'api/user/signup', {
+    return fetch(config.host + 'api/user/signup', {
         method: 'POST',
-        body: JSON.stringify({email: email, password: password}),
+        body: JSON.stringify({email: email, password: password, username: username}),
         credentials: 'include',
         headers: {'Content-type': 'application/json'}
     }).then(response => {
@@ -19,11 +19,11 @@ export function sendSignUp(email, password){
 }
 
 export function sendSignIn(email, password){
-    var host = 'http://localhost:8081/';
+    console.log(config.host);
     console.log("In send sign in");
     console.log(email + password);
 
-    return fetch(host + 'api/user/signin', {
+    return fetch(config.host + 'api/user/signin', {
         method: 'POST',
         body: JSON.stringify({email: email, password: password}),
         credentials: 'include',

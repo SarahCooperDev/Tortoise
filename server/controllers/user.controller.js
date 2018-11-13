@@ -1,12 +1,22 @@
 const User = require('../models/User');
 const passport = require('passport');
 
+exports.verify = function(req, res){
+  console.log("In verify");
+
+  if(req.user){
+    return res.status(200).json({username: req.user.username});
+  } else {
+    return res.send(401);
+  }
+}
+
 exports.signIn = function(req, res){
   console.log("In sign in");
 
   passport.authenticate('local', (status, user) => {
-    console.log("Status is " + status);
     console.log("User is " + user);
+
     if(status === 500){
       return res.status(500);
     } else if(status === 401){
@@ -45,6 +55,7 @@ exports.signUp = function(req, res){
       var newUser = new User();
       newUser.email = req.body.email;
       newUser.password = req.body.password;
+      newUser.username = req.body.username;
 
       newUser.save((err, result) => {
         if(err){
