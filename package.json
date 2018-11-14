@@ -24,6 +24,7 @@
   "homepage": "https://github.com/SarahCooperDev/Tortoise#readme",
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
+    "antd": "^3.10.7",
     "babel-preset-env": "^1.7.0",
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",

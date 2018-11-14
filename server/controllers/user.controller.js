@@ -87,3 +87,10 @@ exports.signUp = function(req, res){
     /*}
   })*/
 }
+
+exports.signOut = function(req, res){
+  console.log("In sign out");
+  req.logOut();
+  req.session.destroy();
+  return res.send(200);
+}
