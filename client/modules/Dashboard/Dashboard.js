@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {sendVerifyRequest} from './DashboardActions';
 import Header from '../Header/Header';
 
+import '../../main.css';
+
 export default class Dashboard extends Component {
   constructor(props){
     super(props);
@@ -34,7 +36,9 @@ export default class Dashboard extends Component {
   render(){
     return (
       <div>
-        <Header />
+        <div className="header">
+          <Header history={this.props.history}/>
+        </div>
 
         <div>
           <h2>Dashboard</h2>

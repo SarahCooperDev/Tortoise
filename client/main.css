@@ -2,3 +2,12 @@
 .errorTxt {
     color: red;
 }
+
+ul {
+    list-style: none;
+}
+
+.header {
+    width: 100%;
+    background-color: green;
+}
