@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Menu, Icon, Dropdown} from 'antd';
-import {sendLogout} from './HeaderActions';
+import {sendLogout, sendVerifyRequest} from './HeaderActions';
 
 import '../../main.css';
 import 'antd/dist/antd.css';
@@ -12,11 +12,31 @@ export default class Header extends Component{
   constructor(props){
     super(props);
     this.state = {
-
+      username: ''
     }
 
     this.logout = this.logout.bind(this);
     this.navigateMenu = this.navigateMenu.bind(this);
+  }
+
+  componentDidMount(){
+    var verifyPromise = sendVerifyRequest();
+
+    verifyPromise.then(result => {
+      console.log("In promise");
+
+      if(result === null || result.status === 401){
+        this.props.history.push('/auth');
+      } else {
+        result.json().then(data => {
+          console.log("Data is " + data);
+          console.log("Username is " + data.username);
+          this.setState({
+            username: data.username
+          });
+        });
+      }
+    });
   }
 
   logout(){
@@ -58,6 +78,9 @@ export default class Header extends Component{
                 <Dropdown overlay={menu}>
                   <Icon type="ellipsis"/>
                 </Dropdown>
+              </td>
+              <td>
+                <h3>{this.state.username}</h3>
               </td>
             </tr>
           </tbody>

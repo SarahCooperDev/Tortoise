@@ -3,6 +3,7 @@ import {sendVerifyRequest} from './DashboardActions';
 import Header from '../Header/Header';
 
 import '../../main.css';
+import 'antd/dist/antd.css';
 
 export default class Dashboard extends Component {
   constructor(props){
@@ -11,26 +12,6 @@ export default class Dashboard extends Component {
       username: ''
     };
 
-  }
-
-  componentDidMount(){
-    var verifyPromise = sendVerifyRequest();
-
-    verifyPromise.then(result => {
-      console.log("In promise");
-
-      if(result === null || result.status === 401){
-        this.props.history.push('/auth');
-      } else {
-        result.json().then(data => {
-          console.log("Data is " + data);
-          console.log("Username is " + data.username);
-          this.setState({
-            username: data.username
-          });
-        });
-      }
-    });
   }
 
   render(){

@@ -78,8 +78,10 @@ passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password
 
 // Routing Imports
 var userRoutes = require('./routes/user.routes');
+var projectRoutes = require('./routes/project.routes');
 
 app.use('/api/user', userRoutes);
+app.use('/api/project', projectRoutes);
 
 app.listen(8081, function(){
   console.log('App listening on port 8081!');
