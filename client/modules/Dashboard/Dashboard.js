@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {sendVerifyRequest} from './DashboardActions';
 import Header from '../Header/Header';
+import Project from './components/Project';
 
 import '../../main.css';
 import 'antd/dist/antd.css';
@@ -23,7 +23,7 @@ export default class Dashboard extends Component {
 
         <div>
           <h2>Dashboard</h2>
-          <h3>{this.state.username}</h3>
+          <Project />
         </div>
       </div>
     )
