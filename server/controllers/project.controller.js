@@ -2,7 +2,6 @@ const Project = require('../models/Project');
 const User = require('../models/User');
 
 exports.addProject = function(req, res){
-  console.log("In add project");
   console.log(req.body.name);
 
   var newProject = new Project();
@@ -16,8 +15,18 @@ exports.addProject = function(req, res){
       req.user.projects.push(result._id);
       
       req.user.save((err, user) => {
-        return res.status(200).send({projects: user.projects});
+        Project.find({'_id': {$in: req.user.projects}}, function(err, projects){
+          console.log(projects);
+          return res.status(200).send({projects: projects});
+        })
       });
     }
   });
+}
+
+exports.getProjects = function(req, res){
+  Project.find({'_id': {$in: req.user.projects}}, function(err, projects){
+    console.log(projects);
+    return res.status(200).send({projects: projects});
+  })
 }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Header from '../Header/Header';
-import Project from './components/Project';
+import Project from '../Project/Project';
 
 import '../../main.css';
 import 'antd/dist/antd.css';

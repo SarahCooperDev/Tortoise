@@ -11,6 +11,7 @@ exports.verify = function(req, res){
 
 exports.signIn = function(req, res){
   passport.authenticate('local', (status, user) => {
+    console.log(status);
     if(status === 500){
       return res.status(500).send();
     } else if(status === 401){
