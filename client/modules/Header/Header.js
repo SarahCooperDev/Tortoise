@@ -43,8 +43,8 @@ export default class Header extends Component{
   render(){
     const menu = (
       <Menu onClick={this.navigateMenu}>
-        <Menu.Item key="1">Account</Menu.Item>
-        <Menu.Item key="2">Logout</Menu.Item>
+        <Menu.Item key="1"><Icon type="user"/>Account</Menu.Item>
+        <Menu.Item key="2"><Icon type="logout"/>Logout</Menu.Item>
       </Menu>
     );
 

@@ -1,6 +1,8 @@
 import React, {Component, } from 'react';
 import { sendSignUp, sendSignIn } from './AuthActions';
-import styles from '../../main.css';
+import {Button, Icon, Input} from 'antd';
+
+import '../../main.css';
 
 class Auth extends Component {
   constructor(props){
@@ -95,11 +97,15 @@ class Auth extends Component {
           <h1>Sign in</h1>
           <p className="errorTxt">{this.state.errorMsg}</p>
           <ul>
-            <li><label>Email</label><input type="text" id="email" name="email" value={this.state.email} onChange={this.onEmailChange}/></li>
-            <li><label>Password</label><input type="password" id="password" name="password" value={this.state.password} onChange={this.onPasswordChange}/></li>
+            <li><Input placeholder="Email" prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+             type="text" id="email" name="email" 
+             value={this.state.email} onChange={this.onEmailChange}/></li>
+            <li><Input placeholder="Password" prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password" id="password" name="password" 
+              value={this.state.password} onChange={this.onPasswordChange}/></li>
           </ul>
-          <button onClick={this.signIn}>Sign In</button>
-          <button onClick={this.switchAuth}>Switch</button>
+          <Button onClick={this.signIn}><Icon type="login"/>Sign In</Button>
+          <Button onClick={this.switchAuth}>Switch</Button>
         </div>
       )
     } else {
@@ -108,12 +114,18 @@ class Auth extends Component {
           <h1>Sign up</h1>
           <p className="errorTxt">{this.state.errorMsg}</p>
           <ul>
-            <li><label>Email</label><input type="text" id="email" name="email" value={this.state.email} onChange={this.onEmailChange}/></li>
-            <li><label>Username</label><input type="text" id="username" name="username" value={this.state.username} onChange={this.onUsernameChange}/></li>
-            <li><label>Password</label><input type="password" id="password" name="password" value={this.state.password} onChange={this.onPasswordChange}/></li>
+            <li><Input placeholder="Email" prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+             type="text" id="email" name="email" 
+             value={this.state.email} onChange={this.onEmailChange}/></li>
+            <li><Input placeholder="Username" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="text" id="username" name="username" 
+              value={this.state.username} onChange={this.onUsernameChange}/></li>
+            <li><Input placeholder="Password" prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password" id="password" name="password" 
+              value={this.state.password} onChange={this.onPasswordChange}/></li>
           </ul>
-          <button onClick={this.signUp}>Sign Up</button>
-          <button onClick={this.switchAuth}>Switch</button>
+          <Button onClick={this.signUp}><Icon type="user-add"/>Sign Up</Button>
+          <Button onClick={this.switchAuth}>Switch</Button>
         </div>
       )
     }
