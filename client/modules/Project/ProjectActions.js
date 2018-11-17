@@ -1,9 +1,9 @@
 import config from '../../config';
 
-export function sendAddProject(projectName){
+export function sendAddProject(projectName, projectDesc){
   return fetch(config.host + 'api/project/add', {
     method: 'POST',
-    body: JSON.stringify({name: projectName}),
+    body: JSON.stringify({name: projectName, description: projectDesc}),
     credentials: 'include',
     headers: {'Content-type': 'application/json'}
   }).then(response => {

@@ -6,7 +6,9 @@ exports.addProject = function(req, res){
 
   var newProject = new Project();
   newProject.name = req.body.name;
+  newProject.description = req.body.description;
   newProject.dateCreated = new Date();
+  newProject.lastUpdated = new Date();
 
   newProject.save((err, result) => {
     if(err){
