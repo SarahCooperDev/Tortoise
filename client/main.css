@@ -14,4 +14,19 @@ ul {
 .header {
     width: 100%;
     background-color: green;
+    color: white;
+}
+
+.projectCard {
+    margin: 5px;
+}
+
+button.ant-btn.submitBtn {
+    background-color:  #4CAF50;
+    color: white;
+}
+
+button.ant-btn.cancelBtn {
+    background-color: red;
+    color: white;
 }
