@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Header from '../Header/Header';
-import Project from '../Project/Project';
+import Projects from '../Projects/Projects';
 
 import '../../main.css';
 import 'antd/dist/antd.css';
@@ -23,7 +23,7 @@ export default class Dashboard extends Component {
 
         <div>
           <h2>Dashboard</h2>
-          <Project />
+          <Projects history={this.props.history}/>
         </div>
       </div>
     )

@@ -17,6 +17,11 @@ export default class Header extends Component{
 
     this.logout = this.logout.bind(this);
     this.navigateMenu = this.navigateMenu.bind(this);
+    this.goToDash = this.goToDash.bind(this);
+  }
+
+  goToDash(){
+    this.props.history.push('/dashboard');
   }
 
   componentDidMount(){
@@ -73,7 +78,7 @@ export default class Header extends Component{
         <table>
           <tbody>
             <tr>
-              <td><h1>Tortoise</h1></td>
+              <td onClick={this.goToDash}><h1>Tortoise</h1></td>
               <td>
                 <Dropdown overlay={menu}>
                   <Icon type="ellipsis"/>

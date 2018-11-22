@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Card, Col, Icon, Input, Row} from 'antd';
-import {sendAddProject, getAllProjects} from '../ProjectActions';
+import {sendAddProject, getAllProjects} from '../ProjectsActions';
 
 import 'antd/dist/antd.css';
 import '../../../main.css';

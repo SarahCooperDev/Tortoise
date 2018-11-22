@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Card, Col, Icon, Input, Row} from 'antd';
-import {sendAddProject, getAllProjects} from '../ProjectActions';
+import {sendAddProject, getAllProjects} from '../ProjectsActions';
 
 import 'antd/dist/antd.css';
 import '../../../main.css';
@@ -14,6 +14,7 @@ export default class ProjectList extends Component{
     };
 
     this.createProjectTable = this.createProjectTable.bind(this);
+    this.goToProject = this.goToProject.bind(this);
     this.props.changeModeToAdd.bind(this);
   }
 
@@ -31,9 +32,11 @@ export default class ProjectList extends Component{
     })
   }
 
+  goToProject(event){
+    this.props.history.push('/project/' + event.target.offsetParent.id);
+  }
+
   createProjectTable(){
-    console.log("Creating project");
-    console.log(this.state.projects);
     var projects = this.state.projects;
     var projectGrid = [];
     var cells = [];
@@ -43,7 +46,7 @@ export default class ProjectList extends Component{
 
       for(let j = 0; j < 3 && cellNo < projects.length; j++){
         cells.push(<Col span={6} key={"col" + cellNo}>
-          <Card className="projectCard" hoverable="true" title={projects[cellNo].name}><p>{projects[cellNo].description}</p></Card>
+          <Card onClick={() => this.goToProject(event)} id={projects[cellNo]._id} className="projectCard" hoverable="true" title={projects[cellNo].name}><p>{projects[cellNo].description}</p></Card>
           </Col>);
         cellNo++;
       }
@@ -52,7 +55,6 @@ export default class ProjectList extends Component{
       projectGrid.push(<p></p>);
       cells = [];
     }
-    console.log(projectGrid);
 
     return projectGrid;
   }
