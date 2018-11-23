@@ -1,6 +1,19 @@
 const Project = require('../models/Project');
 const User = require('../models/User');
 
+exports.getProject = function(req, res){
+  console.log("In get project");
+
+  Project.findOne({'_id': req.body.projectId}, function(err, project){
+    if(err){
+      return res.status(500).send();
+    } else {
+      console.log(project);
+      return res.status(200).send({project: project});
+    }
+  });
+}
+
 exports.addProject = function(req, res){
   console.log(req.body.name);
 
