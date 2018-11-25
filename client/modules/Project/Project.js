@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
 import Header from '../Header/Header';
+import Artefacts from '../Artefacts/Artefacts';
 import {getProjectDetails} from './ProjectActions';
 import {Button, Card, Col, Icon, Input, Row} from 'antd';
 
 import 'antd/dist/antd.css';
 import '../../main.css';
+import './Project.css';
 
 export default class Project extends Component{
   constructor(props){
     super(props);
     this.state = {
-      projectName: null
+      projectName: null,
+      projectDesc: null,
     };
   }
 
@@ -27,7 +30,7 @@ export default class Project extends Component{
         console.log(data);
         console.log(data.project.name);
 
-        this.setState({projectName: data.project.name});
+        this.setState({projectName: data.project.name, projectDesc: data.project.description});
       });
     });
   }
@@ -39,10 +42,22 @@ export default class Project extends Component{
         <div className="header">
           <Header history={this.props.history}/>
         </div>
-        <div>
-          <h2>Project {this.state.projectName}</h2>
-
-        </div>
+        <table>
+          <tbody>
+            <tr>
+              <td className="artefactsComponent">
+                <Artefacts history={this.props.history}/>
+              </td>
+              <td className="mainWindowCell">
+                <div className="mainWindow">
+                  <h2>Project {this.state.projectName}</h2>
+                  <p>{this.state.projectDesc}</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
       </div>
     )
   }
