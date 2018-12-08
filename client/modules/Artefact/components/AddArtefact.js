@@ -12,12 +12,13 @@ export default class AddArtefact extends Component{
     super(props);
 
     this.state = {
-      projectID: this.props.projectID,
+      projectId: this.props.projectId,
       artType: null,
       artAddComment: null
     }
 
     this.props.displayArtefact.bind(this);
+    this.props.updateProject.bind(this);
     this.onSelectType = this.onSelectType.bind(this);
     this.onAddCommentChange = this.onAddCommentChange.bind(this);
     this.submitArtefact = this.submitArtefact.bind(this);
@@ -34,10 +35,16 @@ export default class AddArtefact extends Component{
   submitArtefact(){
     console.log("Submitting");
 
-    var addPromise = addArtefact(this.state.projectID, this.state.artType, this.state.artAddComment);
+    var addPromise = addArtefact(this.state.projectId, this.state.artType, this.state.artAddComment);
 
     addPromise.then(result => {
       console.log(result);
+
+      result.json().then(data => {
+        console.log(data);
+        console.log(data.project);
+        this.props.updateProject(data.project);
+      });
     });
   }
 
@@ -50,7 +57,9 @@ export default class AddArtefact extends Component{
             <tr>
               <td>Artefact Type</td>
               <td><Select style={{ width: 200 }} onChange={this.onSelectType}>
-                <Option value="projectStatement">Project Statement</Option>
+                <Option value="Project Statement">Project Statement</Option>
+                <Option value="Timeline">Timeline</Option>
+                <Option value="User Stories">User Stories</Option>
               </Select></td>
             </tr>
             <tr>

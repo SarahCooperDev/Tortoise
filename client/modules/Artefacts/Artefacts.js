@@ -15,6 +15,7 @@ export default class Artefacts extends Component{
     this.createArtefactList = this.createArtefactList.bind(this);
     this.props.displayArtefact.bind(this);
     this.addArtefact = this.addArtefact.bind(this);
+    this.viewArtefact = this.viewArtefact.bind(this);
   }
 
   componentDidMount(){
@@ -28,7 +29,8 @@ export default class Artefacts extends Component{
     var rows = [];
 
     for(var i = 0; i < artefacts.length; i++){
-      rows.push(<li>artefacts[i].title</li>);
+      console.log("Artefact " + artefacts[i].artType);
+      rows.push(<li onClick={() => this.viewArtefact(event)} id={artefacts[i].artType}>{artefacts[i].artType}</li>);
     }
 
     artefactList.push(<ul>{rows}</ul>);
@@ -36,9 +38,16 @@ export default class Artefacts extends Component{
     return artefactList;
   }
 
+  viewArtefact(event){
+    console.log("View artefact ");
+    console.log(event);
+    console.log(event.target.id);
+    this.props.displayArtefact(null, event.target.id);
+  }
+
   addArtefact(){
     console.log("Add artefact");
-    this.props.displayArtefact("Add");
+    this.props.displayArtefact("Add", null);
   }
 
   render(){
